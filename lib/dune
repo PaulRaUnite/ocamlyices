@@ -6,11 +6,16 @@
  (libraries num camlidl)
  (flags
   (:standard -annot -g))
- (install_c_headers yices yicesl)
- (foreign_stubs
-  (language c)
-  (names yices_stubs yicesl_stubs)
-  (flags :standard -I./ -fPIC)))
+ (foreign_archives ocamlyices)
+ (c_library_flags -lyices)) ; https://discuss.ocaml.org/t/ocaml-c-interface-undefined-reference-to-caml-local-roots/7846/5
+
+(foreign_library
+ (archive_name ocamlyices)
+ (language c)
+ (names yices_stubs yicesl_stubs)
+ ;  (install_c_headers yices yicesl)
+ (flags :standard -lcamlidl -lyices -fPIC)
+ (include_dirs (lib camlidl)))
 
 (env
  (dev
