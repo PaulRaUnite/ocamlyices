@@ -1,5 +1,5 @@
 (lang dune 3.6)
-
+(name ocamlyices)
 (generate_opam_files true)
 
 (license ISC)
