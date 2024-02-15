@@ -1,0 +1,8 @@
+(executables
+ (names one two future)
+ (libraries ocamlyices))
+
+(env
+ (dev
+  (flags
+   (:standard -warn-error -A))))

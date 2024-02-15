@@ -1,0 +1,38 @@
+(library
+ (name ocamlyices)
+ (public_name ocamlyices)
+ (wrapped false)
+ (modules yices yicesl)
+ (libraries num camlidl)
+ (flags
+  (:standard -annot -g))
+ (install_c_headers yices yicesl)
+ (foreign_stubs
+  (language c)
+  (names yices_stubs yicesl_stubs)
+  (flags :standard -I./ -fPIC)))
+
+(env
+ (dev
+  (flags
+   (:standard -warn-error -A))))
+
+(rule
+ (targets yices_stubs.c yices.ml yices.mli)
+ (deps yices.idl ml.sed mli.sed yices.hdr)
+ (action
+  (progn
+   (run camlidl yices.idl)
+   (run sed -f ml.sed -i yices.ml)
+   (run sed -f ml.sed -f mli.sed -e "1r yices.hdr" -i yices.mli)
+   (run sed -e "s/__VERSION__/%{version:ocamlyices}/g" -i yices.mli))))
+
+(rule
+ (targets yicesl_stubs.c yicesl.ml yicesl.mli)
+ (deps yicesl.idl ml.sed mli.sed yicesl.hdr)
+ (action
+  (progn
+   (run camlidl yicesl.idl)
+   (run sed -f ml.sed -i yicesl.ml)
+   (run sed -f ml.sed -f mli.sed -e "1r yicesl.hdr" -i yicesl.mli)
+   (run sed -e "s/__VERSION__/%{version:ocamlyices}/g" -i yicesl.mli))))

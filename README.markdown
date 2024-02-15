@@ -118,22 +118,13 @@ Manual install
 
 2.  Please make sure to uninstall any previous version beforehand.
 
-2.  Configure and build the OCamlyices library (bytecode and native version):
+2.  To build the OCamlyices library (bytecode and native version):
 
-        autoconf # Only if there is no configure
-        ./configure
-        make
+        dune build
 
-    Part of the linking is done by an incremental, aka partial, linking, the
-    rest is done by ocamlc or ocamlopt when you use the OCamlyices library.
+3.  Install the library using opam:
 
-3.  Install the library using ocamlfind's (Findlib) default destination
-    directory:
-
-        make install
-
-    Depending on your OCaml installation you may need admin rights or to `sudo`
-    this last command.
+        opam install .
 
 ### (Expert) Configure options: `./configure [OPTIONS]`
 

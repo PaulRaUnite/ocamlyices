@@ -30,6 +30,5 @@ oUnit*.cache
 /autom4te.cache
 /cache
 /doc
-node_modules/
-_esy/
-esy.lock/
+_build/
+vendor/

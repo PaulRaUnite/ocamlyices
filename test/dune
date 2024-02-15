@@ -1,0 +1,9 @@
+(test
+ (name test)
+ (modules test util specific)
+ (libraries ocamlyices ounit2))
+
+(env
+ (dev
+  (flags
+   (:standard -warn-error -A))))
